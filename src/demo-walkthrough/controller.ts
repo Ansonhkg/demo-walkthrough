@@ -197,18 +197,19 @@ export function useDemoStudio(adapter: StudioAdapter): StudioController {
     };
   }, [adapter]);
   useEffect(() => {
-    if (!playing || mode !== "replay" || handoff) return;
+    if (!playing || mode !== "replay") return;
     let last = performance.now();
     const timer = setInterval(() => {
       const now = performance.now();
-      setTime((v) => Math.min(duration, v + (now - last) * speed));
+      const elapsed = Math.max(0, now - last);
       last = now;
+      setTime((v) => Math.min(duration, v + elapsed * speed));
     }, 100);
     return () => clearInterval(timer);
-  }, [playing, mode, handoff, duration, speed]);
+  }, [playing, mode, duration, speed]);
   useEffect(() => {
-    if (handoff || time >= duration) setPlaying(false);
-  }, [handoff, time, duration]);
+    if (time >= duration) setPlaying(false);
+  }, [time, duration]);
   useEffect(() => {
     if (mode === "replay" && active) setSelected(active.stepId);
   }, [mode, active?.stepId]);

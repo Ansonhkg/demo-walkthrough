@@ -12,7 +12,7 @@ Use Demo Walkthrough to let the owner review the entire product from each person
 
 - Keep the shared studio unchanged. Supply actors, surfaces, workflows, stable target bindings, captions and app-specific authorization through the adapter.
 - Build a DAG of meaningful actions, not just pages. Include every applicable fork, nested branch and join. Show permission failures, empty states and alternate outcomes. Represent a retry as a bounded attempt or a separate journey, not a graph cycle.
-- Associate every step with its actor. Include cross-role handoffs and all relevant subdomains. Let the perspective selector filter journeys; complete-process review shows the handoffs.
+- Associate every step with its actor. Include cross-role handoffs and all relevant subdomains. Let the perspective selector filter journeys. Playback must run continuously across actors; show the actor responsible for each step in the frame header. Never block review with a handoff confirmation screen.
 - Bind highlights and cursor positions to actual DOM elements using the bridge and target hooks. Scroll the correct container to the target. Capture inputs, actions and resulting states separately.
 - Write short subtitles explaining what the person is trying to achieve and the observable result.
 

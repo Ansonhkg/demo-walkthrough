@@ -18,6 +18,12 @@ test('shared controller loads, seeks, changes actors/branches and disposes witho
  await act(async()=>{root.render(React.createElement(Probe));});
  assert.equal(state!.mode,'replay');assert.equal(state!.node.id,'one');
  await act(async()=>state!.select('two'));assert.equal(state!.time,4000);assert.equal(state!.handoff,true);
+ // A different actor is context, never a playback barrier.
+ await act(async()=>state!.setPlaying(true));
+ assert.equal(state!.playing,true);
+ await act(async()=>{await new Promise(resolve=>setTimeout(resolve,220));});
+ assert.ok(state!.time>4000,`playback advances across actor boundaries: time=${state!.time} duration=${state!.duration} playing=${state!.playing} speed=${state!.speed}`);
+ assert.equal(state!.actor,'buyer','review perspective remains selected');
  await act(async()=>state!.crossHandoff());assert.equal(state!.actor,'reviewer');assert.equal(state!.handoff,false);
  await act(async()=>{state!.setBranch('review');state!.setTime(0);});assert.deepEqual(state!.playback.map(c=>c.stepId),['two']);
  await act(async()=>state!.fresh());assert.equal(state!.mode,'live');assert.equal(state!.recording,null);assert.equal(state!.node.id,'two');assert.ok(navigation.length>0);

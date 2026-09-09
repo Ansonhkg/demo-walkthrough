@@ -36,7 +36,6 @@ export function DemoWalkthroughStudio() {
     surfaces,
     playback,
     time,
-    handoff,
     actorName,
     stepActor,
     mode,
@@ -48,7 +47,6 @@ export function DemoWalkthroughStudio() {
     subtitles,
     guideFor,
     selected,
-    crossHandoff,
     cursor,
     recording,
     activeCaptureAt,
@@ -143,7 +141,7 @@ export function DemoWalkthroughStudio() {
                         (s === node.surface ? "wp-frame-active" : "")
                       }
                       key={s}
-                      hidden={s !== node.surface || handoff}
+                      hidden={s !== node.surface}
                     >
                       <header>
                         <strong>
@@ -174,7 +172,7 @@ export function DemoWalkthroughStudio() {
                           prepareSnapshot={prepareSnapshot}
                           capture={c}
                           title={names[s] + " recorded frame"}
-                          active={s === node.surface && !handoff}
+                          active={s === node.surface}
                           onFocus={moveCursor}
                         />
                       ) : (
@@ -200,24 +198,7 @@ export function DemoWalkthroughStudio() {
                     </section>
                   );
                 })}
-                {handoff && (
-                  <div className="wp-handoff" role="status">
-                    <span>PERSON-TO-PERSON HANDOFF</span>
-                    <h2>{actorName(stepActor)} takes the next step</h2>
-                    <p>
-                      Your journey pauses here while another person completes “
-                      {node.label}”.
-                    </p>
-                    <Button onPress={crossHandoff}>
-                      Switch to {actorName(stepActor).toLowerCase()} perspective
-                    </Button>
-                    <Button variant="ghost" onPress={() => chooseActor("all")}>
-                      View complete process
-                    </Button>
-                  </div>
-                )}
                 <div
-                  hidden={handoff}
                   className="wp-persistent-cursor"
                   aria-hidden="true"
                   style={{
@@ -262,7 +243,7 @@ export function DemoWalkthroughStudio() {
                 <Button
                   isIconOnly
                   aria-label={playing ? "Pause" : "Play"}
-                  isDisabled={mode !== "replay" || !duration || handoff}
+                  isDisabled={mode !== "replay" || !duration}
                   onPress={() => {
                     if (time >= duration) setTime(0);
                     setPlaying((v) => !v);
