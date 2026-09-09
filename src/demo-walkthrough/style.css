@@ -500,11 +500,11 @@
   .demo-walkthrough-root .wp-workspace {
     min-height: 0;
     display: grid;
-    grid-template-rows: 40px minmax(0, 1fr) auto 156px;
+    grid-template-rows: minmax(0, 1fr) auto 156px;
     gap: 8px;
   }
   .demo-walkthrough-root [data-review="map"] .wp-workspace {
-    grid-template-rows: 40px minmax(0, 1fr) auto minmax(220px, 30dvh);
+    grid-template-rows: minmax(0, 1fr) auto minmax(220px, 30dvh);
   }
   .demo-walkthrough-root .wp-workspace > .wp-row {
     gap: 10px;
@@ -1046,7 +1046,7 @@
 }
 @media (min-width: 801px) {
   .demo-walkthrough-root .workflow-player[data-review="map"] .wp-workspace {
-    grid-template-rows: 24px minmax(0, 1fr) auto minmax(220px, 30dvh);
+    grid-template-rows: minmax(0, 1fr) auto minmax(220px, 30dvh);
   }
 }
 

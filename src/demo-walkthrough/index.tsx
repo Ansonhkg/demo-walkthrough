@@ -128,12 +128,6 @@ export function DemoWalkthroughStudio() {
             </section>
           ) : (
             <section className="wp-workspace">
-              <div className="wp-row">
-                <div>
-                  <h2>{journeyTitle(workflow.id, actor, workflow.title)}</h2>
-                  <p>{workflow.description}</p>
-                </div>
-              </div>
               <p className="wp-note" aria-live="polite">
                 Now showing {names[node.surface]} · {node.label}
               </p>
