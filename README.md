@@ -1,8 +1,8 @@
 # Demo Walkthrough
 
-![Demo Walkthrough: actor-based product journeys and a branching workflow map](assets/github-cover.png)
+![Demo Walkthrough showing a fictional equipment-rental journey and branching workflow map](assets/github-cover.png)
 
-*Illustrative cover. The framework is experimental.*
+*Illustrative cover featuring Borrow, a fictional rental app. The runnable reference demo uses a document workflow.*
 
 An experimental product demonstration studio with one consistent UI for actor-based journeys across landing pages, signed-in apps, administration tools and provider screens.
 
