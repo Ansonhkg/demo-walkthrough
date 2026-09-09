@@ -1,0 +1,18 @@
+{
+  "name": "demo-walkthrough",
+  "version": "0.2.1",
+  "files": {
+    "README.md": "9c6212d22df03c56e9b82d120cce83d66ddede094a145b08fba210407fda1c59",
+    "ReplayFrame.tsx": "adc0b9cb7a899c4720f30203ee365ea8743a77fc5f178357fd9bde0b316b574b",
+    "VERIFICATION.md": "98603d110fb6928071d552b9a54cd8a49959446d8410ba31ad92da99a9d5870b",
+    "contracts.ts": "3cf591a0b51b3bc88ca8789e92cf3aef0e151d1377cfc1b1e0cbb8ae1bc76a08",
+    "controls.tsx": "02d4b6acb7a298e291b4071cd0fae6925a7f0d812a0a260d9602db0f7a2dd33a",
+    "index.tsx": "ce399bd5e14a5a6b73920fcab2fb34547790063e24e47f0fa2daa4a76f2260c8",
+    "model.ts": "cda25b3082119d258538c8c6c4c0b1826336dbabf8775de74a6aacbe35d75cc6",
+    "provider.tsx": "8db477ead2d9274c7aa84c3fcea2dc2a55c5886e6e2de92ce651c5f71d459f82",
+    "snapshot.ts": "c13e36713c849376c79489d7e07343a0d4cca2ce9e2b69aff58982c0a1d201d0",
+    "style.css": "2ef2c69b9e2275be66941ef5be821f78bff5b7ec383ba651b06e8feccb0ed207",
+    "sync.mjs": "184c45e0bbaecf869c0a812cf2268fb8e01a2b6dba5174268ce6359625239bff",
+    "targets.ts": "7a53055a05a334cdf7557c60d7849b8de2bbce4e63b71457d5980c5f905536c4"
+  }
+}
