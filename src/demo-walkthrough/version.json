@@ -1,18 +1,26 @@
 {
   "name": "demo-walkthrough",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "files": {
-    "README.md": "9c6212d22df03c56e9b82d120cce83d66ddede094a145b08fba210407fda1c59",
+    "README.md": "144c5e05a919062d7cc9310e12627c47b0b5a0824bbd417daf4271f48638324a",
     "ReplayFrame.tsx": "adc0b9cb7a899c4720f30203ee365ea8743a77fc5f178357fd9bde0b316b574b",
-    "VERIFICATION.md": "98603d110fb6928071d552b9a54cd8a49959446d8410ba31ad92da99a9d5870b",
-    "contracts.ts": "3cf591a0b51b3bc88ca8789e92cf3aef0e151d1377cfc1b1e0cbb8ae1bc76a08",
+    "VERIFICATION.md": "504342a31324f85e481c30b565038d0ecd2397dbe277dd9aca1c45dd68d5352f",
+    "adapter.ts": "e360639da911a9d3fb1d5837c24e44206b6710b0bae2e93bc52d12e0d17a65eb",
+    "bindings.ts": "76aef50b0645de48226504dadddfc1bdc658930cdd44791dc6506804db9a49b5",
+    "bridge.ts": "17105826596f240dfc600ab16d5e4a945b4417c238b669591fe8e456d432a5bd",
+    "contracts.ts": "520666303404cfa99d151614548672c5e219898b9c412d3329eec9a1adfbf72d",
+    "controller.ts": "f6e6ed2d42ab3c9e86d3c34d5353eb60efebe37923891a8cf88451116430b86c",
     "controls.tsx": "02d4b6acb7a298e291b4071cd0fae6925a7f0d812a0a260d9602db0f7a2dd33a",
-    "index.tsx": "ce399bd5e14a5a6b73920fcab2fb34547790063e24e47f0fa2daa4a76f2260c8",
-    "model.ts": "cda25b3082119d258538c8c6c4c0b1826336dbabf8775de74a6aacbe35d75cc6",
+    "guidance.ts": "bdad61dce0bcbee42ffcf12730203a23d64c38882e0e9ce9058fe91dd3b8a841",
+    "index.tsx": "3f84b269a12184d71752653954f06b736b4e08e15d00acc4f5d6f631da0033f7",
+    "model.ts": "4b93ede889bcb1e5bfac424b5e73486ba5b62e23d97101c43ad0078d61b240eb",
     "provider.tsx": "8db477ead2d9274c7aa84c3fcea2dc2a55c5886e6e2de92ce651c5f71d459f82",
-    "snapshot.ts": "c13e36713c849376c79489d7e07343a0d4cca2ce9e2b69aff58982c0a1d201d0",
-    "style.css": "2ef2c69b9e2275be66941ef5be821f78bff5b7ec383ba651b06e8feccb0ed207",
-    "sync.mjs": "184c45e0bbaecf869c0a812cf2268fb8e01a2b6dba5174268ce6359625239bff",
-    "targets.ts": "7a53055a05a334cdf7557c60d7849b8de2bbce4e63b71457d5980c5f905536c4"
+    "runner.ts": "70f6169a8b9379794c55333f174b408508584c8cee0db08bdaa4d6f92fea5eea",
+    "snapshot.ts": "1afad901e67a3cf84986bbc1b988625aa53b5e92fe318300fae524a2580a4a81",
+    "style.css": "c5df3181b7e980c4035a50c66254efcce31f6618f470ec1d48d6ec954d62db69",
+    "sync.mjs": "24e0d80f7b0c00a4c3c21941c8675c2a69375f5c5dbe56c18eeefee3bcd682d2",
+    "targets.ts": "7a53055a05a334cdf7557c60d7849b8de2bbce4e63b71457d5980c5f905536c4",
+    "transport.ts": "1c045c50b34046615dfa571d27e9c57c37e5b33dc5bf3fae3dea1da1b6a72429",
+    "validation.ts": "733505f94a3afe0035f54d1117d7eacc95d2daa8354579d09e6e8c6ee2c7bd33"
   }
 }

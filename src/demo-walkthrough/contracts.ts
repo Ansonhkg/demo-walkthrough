@@ -6,6 +6,7 @@ export type Step = {
   surface: Surface;
   path: string;
   expected: string;
+  actor?: string;
 };
 export type Workflow = {
   id: string;
@@ -14,6 +15,11 @@ export type Workflow = {
   nodes: Step[];
   edges: [string, string][];
   route: string[];
+  version?: string;
+  defaultActor?: string;
+  titles?: Record<string, string>;
+  chapters?: { label: string; steps: string[] }[];
+  branches?: { id: string; label: string; steps: string[] }[];
 };
 export type Capture = {
   stepId: string;
@@ -23,27 +29,28 @@ export type Capture = {
   url: string;
   heading: string;
   guideKey?: string;
-  context?: { email: string; name: string };
+  context?: Record<string, string>;
+  guide?: Guide;
+  targetId?: string;
+  click?: boolean;
   verified?: boolean;
   check?: "target" | "input" | "server" | "navigation";
 };
 export type Recording = {
   id: string;
   workflow: string;
+  schemaVersion?: number;
+  definition?: Workflow;
   createdAt: string;
   captures: Capture[];
   outcome?: "running" | "passed" | "failed";
   error?: string;
 };
 export type Perspective = string;
-export type Fixture = {
-  id: string;
-  email: string;
-  name: string;
-  password: string;
-};
+export type Fixture = Record<string, string>;
 export type Guide = { caption: string; action: "inspect" | "click" | "fill" };
 export type StudioController = {
+  cancelRun: () => void;
   libraryOpen: boolean;
   reviewView: "timeline" | "map";
   actor: Perspective;
@@ -91,7 +98,10 @@ export type StudioController = {
     url: string;
     heading: string;
     guideKey?: string;
-    context?: { email: string; name: string };
+    context?: Record<string, string>;
+    guide?: Guide;
+    targetId?: string;
+    click?: boolean;
     verified?: boolean;
     check?: "target" | "input" | "server" | "navigation";
   }[];
@@ -124,6 +134,7 @@ export type StudioController = {
   setBranch: Dispatch<SetStateAction<string>>;
   guideState: string;
   fixture: Fixture | null;
+  details: { label: string; value: string }[];
   error: string;
   setZoom: Dispatch<SetStateAction<number>>;
   width: number;
@@ -137,6 +148,7 @@ export type StudioController = {
     surface: Surface;
     path: string;
     expected: string;
+    actor?: string;
   }[];
   select: (id: string) => void;
   chapters: { label: string; steps: string[] }[];

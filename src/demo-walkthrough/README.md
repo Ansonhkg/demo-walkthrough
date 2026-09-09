@@ -1,31 +1,53 @@
-# Demo walkthrough
+# Demo Walkthrough integration
 
-The standalone demo-walkthrough repository owns the canonical source. ReleaseFast and individual apps keep versioned copies. Consumers copy these files into their repositories; there are no symlinks, cross-repository imports, package registry or runtime dependencies beyond the host's React/React DOM. Version 0.2.1 moves ownership to the standalone repository without changing the Studio runtime.
+The standalone demo-walkthrough repository owns this versioned module. Apps and ReleaseFast copy it; no runtime link to that repository or npm package is required. Requires React 19, React DOM, TypeScript and a CSS-capable bundler.
 
 ```sh
 node src/demo-walkthrough/sync.mjs /path/to/app/packages/demo-walkthrough
-# Update a previously versioned copy; refuses local edits before writing:
-node src/demo-walkthrough/sync.mjs /path/to/app/packages/demo-walkthrough
-# Confirm the consumer matches the canonical source:
 node src/demo-walkthrough/sync.mjs /path/to/app/packages/demo-walkthrough --check
 ```
 
-## Provider integration
-
 ```tsx
-import {DemoWalkthroughProvider, DemoWalkthroughStudio} from './demo-walkthrough';
-function Demonstrations(){
-  const controller = useProductDemoController();
-  return <DemoWalkthroughProvider value={controller}>
-    <DemoWalkthroughStudio />
-  </DemoWalkthroughProvider>;
-}
+import {DemoWalkthrough} from './packages/demo-walkthrough';
+import {adapter} from './my-product/demo-adapter';
+export function Demonstrations() { return <DemoWalkthrough adapter={adapter}/>; }
 ```
 
-`contracts.ts` defines the controller port. This advanced integration supplies React state/setters, actors, journeys, named surfaces, chapters, branches, recording operations, frame URLs and capture preparation. The Studio owns the control placement, timeline, DAG, cursor, click pulse, spotlight, buffered iframe replay, subtitle placement and handoff UI. The controller owns authentication, storage, fixture creation, supported actions and outcome checks. It must keep its controller hook identity stable, stop timers on unmount and update loaded recordings after a run. This is a low-level controller contract, not yet a one-function recorder SDK.
+Keep the adapter object stable. The framework owns the controller, UI, playback, chapter/branch selection, cursor geometry, click pulses, transport correlation/cancellation, recording lifecycle, target resolution, capture mechanics and sanitized replay. `StudioController` is the internal presentation port; hosts do not implement its state/setters.
 
-Mount the Studio as the outer page, outside product navigation. Run it on any host route with the required app-origin permissions. Existing projects can supply selector-based target recipes. New controls may use `const target=useDemoTarget('post.publish')` with `<button ref={target}>Publish</button>`. Target IDs survive text/theme changes. `measureDemoTarget`, `observeDemoTarget` and `framePoint` provide coordinate hooks; keep frame origin/source/nonce and action allowlist validation in the app bridge. The framework never authorizes an action on behalf of an app.
+## Adapter contract
 
-`prepareSnapshot(capture)` must return sanitized, script-free HTML with a restrictive CSP and inline styles. It can mark the exact target `data-player-focus`. The bundled ReplayFrame keeps the previous document painted until the new one is ready, measures the displayed target and renders an external 50% mask. Only trusted app-owned capture pipelines are supported. Strip secrets before saving; permit asset origins explicitly; never allow script execution in replay. A highlight is guidance, not evidence of action completion.
+`StudioAdapter` in adapter.ts supplies:
 
-React 19, TypeScript with DOM support and a CSS-capable bundler are required. Controls/icons are owned source; HeroUI is not required. Consumers should not modify framework files to customize journeys. Keep adapters outside this folder; review updates against version.json.
+- `workflows`: versioned nodes with explicit actors, edges, traversal route, optional chapters/branches and perspective titles.
+- `actors` and `surfaces`: names, initial routes, URL resolvers and exact permitted origins. Include each provider origin explicitly.
+- `guide`: product captions and actions. Target recipes use stable target IDs or selectors with scoped text and context interpolation.
+- `store.list/save`: host-owned recording persistence and authorization. Enforce validation and ownership on the server; client config does not grant access.
+- `plan`: domain preparation and planned steps. Shared runWalkthrough handles waiting, cancellation, capture, action execution, progress persistence and failure evidence. Domain callbacks implement dynamic URLs, fixtures, manual steps and outcome checks.
+- `prepareSnapshot`: call prepareReplaySnapshot with explicitly allowed asset origins and optional legacy target resolver.
+- Optional navigation, subtitle preferences and development details. Details are explicit opt-in display values, never automatically inferred passwords.
+
+Mount outside product navigation. Standalone Studio does not require an operator console, backend framework, account shape or fixed number of surfaces. browserNavigation and browserPreferences are optional conveniences. Use another implementation when embedding or rendering in a different routing environment.
+
+## Instrument participating pages
+
+Call `installDemoBridge` on each approved live app/provider page. Supply an exact parent origin, an asynchronous enabled policy, registered recipes and an action authorization callback. The bridge verifies parent source, origin, protocol and nonce. Use its returned disposer for teardown. Never make production authorization depend on a synthetic name alone.
+
+```tsx
+const target = useDemoTarget('document.submit');
+return <button ref={target}>Submit for review</button>;
+```
+
+A recipe `{target:'document.submit', caption:'Submit the document', action:'click'}` works without matching product text/classes. Legacy selectors remain supported. Multi-input actions declare `fields` explicitly. Context interpolation is generic; no email or password fields are assumed by the framework.
+
+The bridge captures DOM/CSS, strips executable content and input values, preserves the exact marked target, and only retains values/context expressly approved by the adapter. Host policies must strip secrets from text and attributes too; this is not a universal PII detector. Replay has no script execution, form submission or navigable links. External fonts/images need explicit approved asset origins. Cross-origin stylesheets, canvas/video state and inaccessible shadow content require host capture extensions; the DOM recorder does not promise pixel-perfect recording of every browser primitive.
+
+## Recording compatibility
+
+New recordings freeze a schema version, workflow definition, captions and confirmed click cues. Replay uses captured target markers. Legacy captures can use a host resolver/current guide fallback and are not retroactively verified. Coverage without an explicit passed outcome is labelled unverified. Original timestamps remain evidence; the paced review clock is separate.
+
+A DAG defines dependencies/choices; `route` defines the selected traversal. Chapters define playback grouping. Domain fixture lifecycle and branch prerequisites belong in the execution plan; the engine does not invent paths or claim every possible branch ran.
+
+## Updating
+
+Change canonical source, bump version.json, regenerate the manifest, run checks, then sync consumers. Sync rejects local edits, symlinks, unmanaged files, stale files during check, and mismatched manifests. Removed managed files are deleted only when unchanged from the previous manifest. No cross-repository dependency is introduced.

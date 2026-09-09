@@ -37,7 +37,7 @@ export const clock = (ms: number) =>
       "0",
     )}:${Math.floor(ms / 1000) % 60 < 10 ? "0" : ""}${Math.floor(ms / 1000) % 60}`;
 export function workflowPlayback(captures: Capture[], workflow: Workflow) {
-  const order = workflow.route;
+  const order = workflow.chapters?.flatMap((c) => c.steps) ?? workflow.route;
   const ordered = captures
     .map((capture, index) => ({ capture, index }))
     .sort((a, b) => {
@@ -58,4 +58,45 @@ export function workflowPlayback(captures: Capture[], workflow: Workflow) {
       );
     return { ...capture, playAt };
   });
+}
+
+export function recordingProgress(
+  run: import("./contracts").Recording,
+  workflow: Workflow,
+) {
+  const definition = run.definition ?? workflow,
+    captured = new Set(run.captures.map((c) => c.stepId)),
+    missing = definition.route.filter((id) => !captured.has(id));
+  const complete = missing.length === 0 && run.outcome === "passed";
+  return {
+    complete,
+    count: definition.route.length - missing.length,
+    total: definition.route.length,
+    next: definition.nodes.find((n) => n.id === missing[0])?.label,
+    label: complete
+      ? "Complete"
+      : run.outcome === "failed"
+        ? "Failed"
+        : missing.length
+          ? "Incomplete"
+          : "Captured; unverified",
+  };
+}
+export function latestRecording(
+  runs: import("./contracts").Recording[],
+  workflow: Workflow,
+) {
+  const matching = runs
+    .filter((r) => r.workflow === workflow.id)
+    .sort((a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt));
+  return (
+    matching.find((r) => recordingProgress(r, workflow).complete) ??
+    matching.find((r) => {
+      const p = recordingProgress(r, workflow);
+      return (
+        p.count === p.total && r.outcome !== "failed" && r.outcome !== "running"
+      );
+    }) ??
+    matching[0]
+  );
 }

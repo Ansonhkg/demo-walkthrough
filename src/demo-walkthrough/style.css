@@ -1,64 +1,64 @@
-.workflow-player {
+.demo-walkthrough-root .workflow-player {
   max-width: 1800px;
   margin: auto;
 }
-.wp-heading,
-.wp-row {
+.demo-walkthrough-root .wp-heading,
+.demo-walkthrough-root .wp-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
 }
-.wp-heading {
+.demo-walkthrough-root .wp-heading {
   margin-bottom: 28px;
 }
-.wp-heading h1 {
+.demo-walkthrough-root .wp-heading h1 {
   font-size: 32px;
   margin: 6px 0;
 }
-.wp-heading p,
-.wp-note,
-.wp-library p,
-.wp-row p {
+.demo-walkthrough-root .wp-heading p,
+.demo-walkthrough-root .wp-note,
+.demo-walkthrough-root .wp-library p,
+.demo-walkthrough-root .wp-row p {
   color: var(--muted);
   font-size: 13px;
 }
-.wp-heading small {
+.demo-walkthrough-root .wp-heading small {
   letter-spacing: 2px;
   font-size: 10px;
 }
-.wp-pill {
+.demo-walkthrough-root .wp-pill {
   border: 1px solid var(--border);
   border-radius: 20px;
   padding: 6px 12px;
   font-size: 11px;
   white-space: nowrap;
 }
-.wp-layout {
+.demo-walkthrough-root .wp-layout {
   display: grid;
   grid-template-columns: 190px minmax(0, 1fr);
   gap: 24px;
 }
-.wp-library {
+.demo-walkthrough-root .wp-library {
   border-right: 1px solid var(--border);
   padding-right: 16px;
 }
-.wp-library h2,
-.wp-map h3 {
+.demo-walkthrough-root .wp-library h2,
+.demo-walkthrough-root .wp-map h3 {
   font-size: 14px;
 }
-.wp-library .button {
+.demo-walkthrough-root .wp-library .button {
   width: 100%;
   justify-content: flex-start;
   margin: 4px 0;
   white-space: normal;
   text-align: left;
 }
-.wp-library hr {
+.demo-walkthrough-root .wp-library hr {
   margin: 24px 0;
   border-color: var(--border);
 }
-.wp-run {
+.demo-walkthrough-root .wp-run {
   display: block;
   background: none;
   border: 1px solid var(--border);
@@ -69,65 +69,65 @@
   margin: 8px 0;
   font-size: 12px;
 }
-.wp-run small {
+.demo-walkthrough-root .wp-run small {
   display: block;
   color: var(--muted);
   margin-top: 4px;
 }
-.wp-workspace {
+.demo-walkthrough-root .wp-workspace {
   min-width: 0;
 }
-.wp-workspace h2 {
+.demo-walkthrough-root .wp-workspace h2 {
   font-size: 22px;
   margin: 0;
 }
-.wp-workspace .tabs {
+.demo-walkthrough-root .wp-workspace .tabs {
   margin: 16px 0;
 }
-.wp-stage {
+.demo-walkthrough-root .wp-stage {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: 12px;
 }
-.wp-stage-all {
+.demo-walkthrough-root .wp-stage-all {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
-.wp-frame {
+.demo-walkthrough-root .wp-frame {
   overflow: hidden;
   border: 1px solid var(--border);
   border-radius: 12px;
   background: var(--surface);
 }
-.wp-frame-active {
-  border-color: var(--club-accent);
-  box-shadow: 0 0 0 1px var(--club-accent);
+.demo-walkthrough-root .wp-frame-active {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent);
 }
-.wp-frame header {
+.demo-walkthrough-root .wp-frame header {
   display: flex;
   justify-content: space-between;
   padding: 12px;
   font-size: 12px;
 }
-.wp-frame header small {
+.demo-walkthrough-root .wp-frame header small {
   color: var(--muted);
 }
-.wp-address {
+.demo-walkthrough-root .wp-address {
   font-size: 10px;
   color: var(--muted);
   padding: 6px 12px;
-  background: var(--background);
+  background: var(--dw-background);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.wp-frame iframe {
+.demo-walkthrough-root .wp-frame iframe {
   display: block;
   width: 100%;
   height: 430px;
   border: 0;
   background: white;
 }
-.wp-frame-empty {
+.demo-walkthrough-root .wp-frame-empty {
   height: 430px;
   display: grid;
   place-items: center;
@@ -136,7 +136,7 @@
   color: var(--muted);
   font-size: 13px;
 }
-.wp-controls {
+.demo-walkthrough-root .wp-controls {
   display: flex;
   align-items: center;
   gap: 16px;
@@ -145,71 +145,71 @@
   border-radius: 12px;
   margin-top: 16px;
 }
-.wp-controls .slider {
+.demo-walkthrough-root .wp-controls .slider {
   flex: 1;
   min-width: 70px;
 }
-.wp-clock {
+.demo-walkthrough-root .wp-clock {
   font:
     13px ui-monospace,
     monospace;
   white-space: nowrap;
 }
-.wp-controls label {
+.demo-walkthrough-root .wp-controls label {
   font-size: 11px;
   white-space: nowrap;
 }
-.wp-controls select {
+.demo-walkthrough-root .wp-controls select {
   background: var(--surface);
   padding: 6px;
   border: 1px solid var(--border);
   border-radius: 6px;
 }
-.wp-note {
+.demo-walkthrough-root .wp-note {
   font-size: 11px;
   line-height: 1.5;
 }
-.wp-bottom {
+.demo-walkthrough-root .wp-bottom {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 220px;
   gap: 12px;
   margin-top: 20px;
 }
-.wp-map,
-.wp-inspector {
+.demo-walkthrough-root .wp-map,
+.demo-walkthrough-root .wp-inspector {
   border: 1px solid var(--border);
   border-radius: 12px;
   background: var(--surface);
   min-width: 0;
 }
-.wp-map header {
+.demo-walkthrough-root .wp-map header {
   padding: 16px;
 }
-.wp-map header small {
+.demo-walkthrough-root .wp-map header small {
   color: var(--muted);
   font-size: 11px;
 }
-.wp-graph-scroll {
+.demo-walkthrough-root .wp-graph-scroll {
   overflow: auto;
   background-image: radial-gradient(var(--border) 1px, transparent 1px);
   background-size: 18px 18px;
   min-height: 290px;
 }
-.wp-graph {
+.demo-walkthrough-root .wp-graph {
   position: relative;
   transform-origin: top left;
 }
-.wp-graph svg {
+.demo-walkthrough-root .wp-graph svg {
   position: absolute;
   inset: 0;
   color: var(--muted);
 }
-.wp-graph svg > path {
+.demo-walkthrough-root .wp-graph svg > path {
   stroke: var(--muted);
   fill: none;
   stroke-width: 1.5;
 }
-.wp-node {
+.demo-walkthrough-root .wp-node {
   position: absolute;
   width: 155px;
   height: 60px;
@@ -220,90 +220,90 @@
   padding: 10px;
   text-align: left;
 }
-.wp-node strong {
+.demo-walkthrough-root .wp-node strong {
   display: block;
   font-size: 13px;
 }
-.wp-node small {
+.demo-walkthrough-root .wp-node small {
   display: block;
   color: var(--muted);
   font-size: 9px;
   margin-top: 6px;
 }
-.wp-node.selected {
-  border: 2px solid var(--club-accent);
+.demo-walkthrough-root .wp-node.selected {
+  border: 2px solid var(--accent);
 }
-.wp-inspector {
+.demo-walkthrough-root .wp-inspector {
   padding: 18px;
   font-size: 12px;
   line-height: 1.6;
 }
-.wp-inspector > small {
+.demo-walkthrough-root .wp-inspector > small {
   letter-spacing: 1.5px;
   font-size: 9px;
   color: var(--muted);
 }
-.wp-inspector h3 {
+.demo-walkthrough-root .wp-inspector h3 {
   font-size: 18px;
 }
-.wp-inspector h4 {
+.demo-walkthrough-root .wp-inspector h4 {
   margin: 20px 0 4px;
 }
-.wp-inspector .button {
+.demo-walkthrough-root .wp-inspector .button {
   width: 100%;
   margin-top: 16px;
 }
 @media (max-width: 1100px) {
-  .wp-layout {
+  .demo-walkthrough-root .wp-layout {
     grid-template-columns: 1fr;
   }
-  .wp-library {
+  .demo-walkthrough-root .wp-library {
     display: flex;
     flex-wrap: wrap;
     border: 0;
     gap: 8px;
   }
-  .wp-library h2,
-  .wp-library hr,
-  .wp-library h3,
-  .wp-library p {
+  .demo-walkthrough-root .wp-library h2,
+  .demo-walkthrough-root .wp-library hr,
+  .demo-walkthrough-root .wp-library h3,
+  .demo-walkthrough-root .wp-library p {
     display: none;
   }
-  .wp-library .button {
+  .demo-walkthrough-root .wp-library .button {
     width: auto;
   }
-  .wp-bottom {
+  .demo-walkthrough-root .wp-bottom {
     grid-template-columns: 1fr;
   }
-  .wp-controls {
+  .demo-walkthrough-root .wp-controls {
     flex-wrap: wrap;
   }
-  .wp-stage-all {
+  .demo-walkthrough-root .wp-stage-all {
     grid-template-columns: 1fr;
   }
-  .wp-frame iframe {
+  .demo-walkthrough-root .wp-frame iframe {
     height: 420px;
   }
-  .tea-values {
+  .demo-walkthrough-root .tea-values {
     grid-template-columns: 1fr;
   }
 }
-.wp-graph-scroll::-webkit-scrollbar,
-.wp-library::-webkit-scrollbar {
+.demo-walkthrough-root .wp-graph-scroll::-webkit-scrollbar,
+.demo-walkthrough-root .wp-library::-webkit-scrollbar {
   height: 6px;
   width: 6px;
 }
-.wp-graph-scroll::-webkit-scrollbar-thumb {
+.demo-walkthrough-root .wp-graph-scroll::-webkit-scrollbar-thumb {
   background: var(--border);
   border-radius: 8px;
 }
-.wp-controls .slider {
+.demo-walkthrough-root .wp-controls .slider {
   flex-basis: 160px;
 }
-.wp-controls {
+.demo-walkthrough-root .wp-controls {
   flex-wrap: wrap;
 }
-.wp-controls > .button {
+.demo-walkthrough-root .wp-controls > .button {
   flex-shrink: 0;
 }
 
@@ -312,21 +312,21 @@
   width: 100%;
   min-height: 100dvh;
   padding: 12px 24px 24px;
-  background: var(--background);
+  background: var(--dw-background);
 }
-.player-shell-tools {
+.demo-walkthrough-root .player-shell-tools {
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 32px;
   margin-bottom: 4px;
 }
-.player-shell-tools > a {
+.demo-walkthrough-root .player-shell-tools > a {
   color: var(--muted);
   font-size: 12px;
   text-decoration: none;
 }
-.workflow-player {
+.demo-walkthrough-root .workflow-player {
   max-width: none;
   margin: 0;
 }
@@ -395,17 +395,17 @@
     width: 100%;
   }
 }
-.wp-capture-markers {
+.demo-walkthrough-root .wp-capture-markers {
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
   margin-top: 10px;
 }
-.wp-capture-markers [aria-pressed="true"] {
+.demo-walkthrough-root .wp-capture-markers [aria-pressed="true"] {
   background: var(--surface);
-  box-shadow: inset 0 0 0 1px var(--club-accent);
+  box-shadow: inset 0 0 0 1px var(--accent);
 }
-.wp-subtitles {
+.demo-walkthrough-root .wp-subtitles {
   background: #101510;
   color: #f6f8f2;
   border: 1px solid #394338;
@@ -419,12 +419,12 @@
   justify-content: center;
   gap: 6px;
 }
-.wp-subtitles > span {
+.demo-walkthrough-root .wp-subtitles > span {
   font-size: 11px;
   color: #c8d4c2;
   letter-spacing: 0.3px;
 }
-.wp-subtitles > p {
+.demo-walkthrough-root .wp-subtitles > p {
   font-size: 16px;
   line-height: 1.5;
   margin: 0;
@@ -432,10 +432,10 @@
   align-self: center;
   text-wrap: pretty;
 }
-.wp-frame {
+.demo-walkthrough-root .wp-frame {
   position: relative;
 }
-.wp-frame > .wp-subtitles {
+.demo-walkthrough-root .wp-frame > .wp-subtitles {
   position: absolute;
   left: 20px;
   right: 20px;
@@ -463,12 +463,12 @@
     display: flex;
     flex-direction: column;
   }
-  .player-shell-tools {
+  .demo-walkthrough-root .player-shell-tools {
     height: 24px;
     flex-shrink: 0;
     margin: 0;
   }
-  .workflow-player {
+  .demo-walkthrough-root .workflow-player {
     flex: 1;
     min-height: 0;
     display: flex;
@@ -566,39 +566,39 @@
   .demo-walkthrough-root .wp-controls .slider {
     flex-basis: 100px;
   }
-  .wp-review {
+  .demo-walkthrough-root .wp-review {
     min-height: 0;
     overflow: auto;
     border-top: 1px solid var(--border);
     padding-top: 4px;
   }
-  .wp-review > .wp-capture-markers {
+  .demo-walkthrough-root .wp-review > .wp-capture-markers {
     flex-wrap: nowrap;
     overflow-x: auto;
     margin-top: 4px;
     gap: 4px;
   }
-  .wp-review > .wp-capture-markers > button {
+  .demo-walkthrough-root .wp-review > .wp-capture-markers > button {
     flex-shrink: 0;
   }
-  .wp-review > p {
+  .demo-walkthrough-root .wp-review > p {
     margin: 3px 0;
     font-size: 11px;
   }
-  .wp-review > label {
+  .demo-walkthrough-root .wp-review > label {
     display: inline-flex;
     align-items: center;
     gap: 8px;
     font-size: 11px;
   }
-  .wp-review > label select {
+  .demo-walkthrough-root .wp-review > label select {
     width: auto;
     padding: 3px 8px;
   }
-  [data-review="timeline"] .wp-bottom {
+  .demo-walkthrough-root [data-review="timeline"] .wp-bottom {
     display: none;
   }
-  [data-review="map"] .wp-review > :not(.wp-bottom) {
+  .demo-walkthrough-root [data-review="map"] .wp-review > :not(.wp-bottom) {
     display: none;
   }
   .demo-walkthrough-root .wp-bottom {
@@ -606,12 +606,12 @@
     height: 100%;
     grid-template-columns: minmax(0, 1fr) 240px;
   }
-  .wp-map {
+  .demo-walkthrough-root .wp-map {
     display: flex;
     flex-direction: column;
     min-height: 0;
   }
-  .wp-map header {
+  .demo-walkthrough-root .wp-map header {
     padding: 6px 10px;
   }
   .demo-walkthrough-root .wp-graph-scroll {
@@ -619,32 +619,32 @@
     max-height: none;
     flex: 1;
   }
-  .wp-inspector {
+  .demo-walkthrough-root .wp-inspector {
     overflow: auto;
     padding: 10px;
   }
 }
 @media (max-width: 800px) {
-  [data-library="false"] .wp-library {
+  .demo-walkthrough-root [data-library="false"] .wp-library {
     display: none;
   }
-  [data-review="timeline"] .wp-bottom {
+  .demo-walkthrough-root [data-review="timeline"] .wp-bottom {
     display: none;
   }
 }
-.wp-heading > div:first-child {
+.demo-walkthrough-root .wp-heading > div:first-child {
   display: flex;
   align-items: center;
   gap: 20px;
 }
-.wp-workflow-picker {
+.demo-walkthrough-root .wp-workflow-picker {
   display: flex;
   align-items: center;
   gap: 8px;
   font-size: 12px;
   color: var(--muted);
 }
-.wp-workflow-picker select {
+.demo-walkthrough-root .wp-workflow-picker select {
   width: auto;
   max-width: 280px;
   background: var(--surface);
@@ -657,12 +657,12 @@
   grid-template-columns: minmax(0, 1fr);
 }
 @media (max-width: 800px) {
-  .wp-heading,
-  .wp-heading > div:first-child {
+  .demo-walkthrough-root .wp-heading,
+  .demo-walkthrough-root .wp-heading > div:first-child {
     flex-wrap: wrap;
   }
 }
-.wp-replay-buffer {
+.demo-walkthrough-root .wp-replay-buffer {
   position: relative;
   flex: 1;
   min-height: 0;
@@ -680,21 +680,21 @@
   transition: none !important;
 }
 @media (max-width: 800px) {
-  .wp-replay-buffer {
+  .demo-walkthrough-root .wp-replay-buffer {
     height: 58dvh;
     min-height: 360px;
   }
 }
-.wp-spotlight {
+.demo-walkthrough-root .wp-spotlight {
   position: absolute;
   inset: 0;
   z-index: 2;
   pointer-events: none;
 }
-.wp-stage {
+.demo-walkthrough-root .wp-stage {
   position: relative;
 }
-.wp-persistent-cursor {
+.demo-walkthrough-root .wp-persistent-cursor {
   position: absolute;
   left: 0;
   top: 0;
@@ -705,15 +705,15 @@
   will-change: transform;
 }
 @media (prefers-reduced-motion: reduce) {
-  .wp-persistent-cursor {
+  .demo-walkthrough-root .wp-persistent-cursor {
     transition: none;
   }
 }
-.wp-persistent-cursor {
+.demo-walkthrough-root .wp-persistent-cursor {
   width: 22px;
   height: 29px;
 }
-.wp-click-pulse {
+.demo-walkthrough-root .wp-click-pulse {
   position: absolute;
   left: -15px;
   top: -15px;
@@ -724,7 +724,7 @@
   background: #b9ed7233;
   animation: wp-click-ring 600ms ease-out 500ms both;
 }
-.wp-cursor-clicking {
+.demo-walkthrough-root .wp-cursor-clicking {
   transform-origin: 2px 2px;
   animation: wp-click-press 350ms ease-out 500ms both;
 }
@@ -754,16 +754,16 @@
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .wp-click-pulse,
-  .wp-cursor-clicking {
+  .demo-walkthrough-root .wp-click-pulse,
+  .demo-walkthrough-root .wp-cursor-clicking {
     animation: none;
   }
-  .wp-click-pulse {
+  .demo-walkthrough-root .wp-click-pulse {
     display: none;
   }
 }
-.wp-handoff,
-.wp-actor-empty {
+.demo-walkthrough-root .wp-handoff,
+.demo-walkthrough-root .wp-actor-empty {
   padding: 32px;
   display: flex;
   flex-direction: column;
@@ -776,18 +776,18 @@
   border-radius: 12px;
   background: var(--surface);
 }
-.wp-handoff span {
+.demo-walkthrough-root .wp-handoff span {
   font-size: 11px;
   letter-spacing: 1.5px;
   color: var(--muted);
 }
-.wp-handoff p {
+.demo-walkthrough-root .wp-handoff p {
   max-width: 520px;
 }
-.wp-heading > div:first-child {
+.demo-walkthrough-root .wp-heading > div:first-child {
   gap: 12px;
 }
-.wp-workflow-picker select {
+.demo-walkthrough-root .wp-workflow-picker select {
   max-width: 210px;
 }
 @media (min-width: 801px) and (max-width: 1300px) {
@@ -796,16 +796,17 @@
     min-height: 64px;
     flex-wrap: wrap;
   }
-  .wp-heading > div:first-child {
+  .demo-walkthrough-root .wp-heading > div:first-child {
     flex-wrap: wrap;
   }
-  .wp-workflow-picker select {
+  .demo-walkthrough-root .wp-workflow-picker select {
     max-width: 190px;
   }
 }
 
 /* Owned controls: no external component or icon package. */
-.workflow-player {
+.demo-walkthrough-root .workflow-player {
+  --dw-background: #10140f;
   --surface: #181e15;
   --border: #343d2c;
   --muted: #a2aa99;
@@ -819,27 +820,27 @@
   height: 100dvh;
   overflow: hidden;
 }
-.workflow-player * {
+.demo-walkthrough-root .workflow-player * {
   box-sizing: border-box;
 }
-.workflow-player h1,
-.workflow-player h2,
-.workflow-player h3,
-.workflow-player p {
+.demo-walkthrough-root .workflow-player h1,
+.demo-walkthrough-root .workflow-player h2,
+.demo-walkthrough-root .workflow-player h3,
+.demo-walkthrough-root .workflow-player p {
   margin-top: 0;
 }
-.workflow-player button,
-.workflow-player select {
+.demo-walkthrough-root .workflow-player button,
+.demo-walkthrough-root .workflow-player select {
   font: inherit;
 }
-.workflow-player select {
+.demo-walkthrough-root .workflow-player select {
   color: inherit;
   background: #20261c;
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 8px;
 }
-.workflow-player .dw-button {
+.demo-walkthrough-root .workflow-player .dw-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -854,34 +855,34 @@
   cursor: pointer;
   white-space: nowrap;
 }
-.workflow-player .dw-button[data-variant="ghost"] {
+.demo-walkthrough-root .workflow-player .dw-button[data-variant="ghost"] {
   background: transparent;
   color: inherit;
 }
-.workflow-player .dw-button[data-variant="secondary"] {
+.demo-walkthrough-root .workflow-player .dw-button[data-variant="secondary"] {
   background: #252c20;
   color: inherit;
 }
-.workflow-player .dw-button:disabled {
+.demo-walkthrough-root .workflow-player .dw-button:disabled {
   opacity: 0.45;
   cursor: default;
 }
-.workflow-player .dw-icon {
+.demo-walkthrough-root .workflow-player .dw-icon {
   width: 36px;
   padding: 8px;
 }
-.workflow-player :focus-visible {
+.demo-walkthrough-root .workflow-player :focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
-.workflow-player .dw-slider {
+.demo-walkthrough-root .workflow-player .dw-slider {
   appearance: auto;
   accent-color: var(--accent);
   height: 20px;
   min-width: 80px;
   flex: 1;
 }
-.workflow-player .wp-stage {
+.demo-walkthrough-root .workflow-player .wp-stage {
   background: #101510;
 }
 

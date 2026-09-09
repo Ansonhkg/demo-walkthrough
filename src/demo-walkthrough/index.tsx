@@ -15,6 +15,7 @@ export * from "./provider";
 export type * from "./contracts";
 export function DemoWalkthroughStudio() {
   const {
+    cancelRun,
     libraryOpen,
     reviewView,
     actor,
@@ -74,6 +75,7 @@ export function DemoWalkthroughStudio() {
     setBranch,
     guideState,
     fixture,
+    details,
     error,
     setZoom,
     width,
@@ -200,7 +202,7 @@ export function DemoWalkthroughStudio() {
                 </button>
               ))}
             {!recordings.some((r) => r.workflow === workflow.id) && (
-              <p>No recording yet. Capture steps in the live views below.</p>
+              <p>No recording yet. Record the complete process to create one.</p>
             )}
           </aside>
           {!journeys.length ? (
@@ -230,7 +232,7 @@ export function DemoWalkthroughStudio() {
                   <Button
                     variant="secondary"
                     onPress={() => {
-                      stopRun.current = true;
+                      cancelRun();
                     }}
                   >
                     Stop run
@@ -355,7 +357,8 @@ export function DemoWalkthroughStudio() {
                   }}
                 >
                   {mode === "replay" &&
-                    guideFor(workflow.id, selected)?.action === "click" && (
+                    playback.find((c) => c.playAt === activeCaptureAt)
+                      ?.click === true && (
                       <span
                         key={`${recording?.id}:${activeCaptureAt}`}
                         className="wp-click-pulse"
@@ -369,7 +372,8 @@ export function DemoWalkthroughStudio() {
                     }
                     className={
                       mode === "replay" &&
-                      guideFor(workflow.id, selected)?.action === "click"
+                      playback.find((c) => c.playAt === activeCaptureAt)
+                        ?.click === true
                         ? "wp-cursor-clicking"
                         : ""
                     }
@@ -585,19 +589,20 @@ export function DemoWalkthroughStudio() {
                   })()}
                 <p className="wp-note">
                   {mode === "live"
-                    ? "Live views: perform the action, then capture the step. Captures document the screen; they do not assert a test passed."
+                    ? "Live preview. Record the complete process to capture actions and their observed results. Captures alone do not assert a test passed."
                     : `${captures.length} captured frames · Each capture held for review · Original recording ${clock(captures.at(-1)?.at || 0)}. Only captured states are available, not continuous video.`}
                 </p>
                 {guideState && mode === "live" && (
                   <p role="status">{guideState}</p>
                 )}
-                {fixture && (
+                {details.length > 0 && (
                   <details>
-                    <summary>Synthetic test account</summary>
-                    <p>
-                      {fixture.email} · {fixture.name}
-                    </p>
-                    <code>{fixture.password}</code>
+                    <summary>Run details</summary>
+                    {details.map((d) => (
+                      <p key={d.label}>
+                        <strong>{d.label}</strong>: <code>{d.value}</code>
+                      </p>
+                    ))}
                   </details>
                 )}
                 {(error || recording?.error) && (
@@ -711,3 +716,18 @@ export function DemoWalkthroughStudio() {
 }
 
 export * from "./targets";
+
+export { useDemoStudio } from "./controller";
+export type { StudioAdapter } from "./adapter";
+
+import { useDemoStudio as useStudioController } from "./controller";
+import { DemoWalkthroughProvider as StudioProvider } from "./provider";
+import type { StudioAdapter } from "./adapter";
+export function DemoWalkthrough({ adapter }: { adapter: StudioAdapter }) {
+  const controller = useStudioController(adapter);
+  return (
+    <StudioProvider value={controller}>
+      <DemoWalkthroughStudio />
+    </StudioProvider>
+  );
+}

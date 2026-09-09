@@ -1,48 +1,35 @@
 # Demo Walkthrough
 
-An experimental, reusable presentation studio for exploring a product through different actors and journeys. It can cover landing pages, signed-in apps and administration screens in one player.
+An experimental product demonstration studio with one consistent UI for actor-based journeys across landing pages, signed-in apps, administration tools and provider screens.
 
-The shared UI owns actor and workflow selection, playback controls, the timeline, branching DAG, subtitles, cursor animation, click feedback, spotlight and buffered snapshot replay. Your app supplies a provider adapter for its workflows, recordings, permissions and actions.
+The shared framework owns the Studio controller, playback, DAG, subtitles, cursor/click feedback, spotlight, iframe transport, recording lifecycle, DOM capture and replay. Your app provides its definitions, target bindings, permissions, persistence and domain checks.
 
-## Use it in your app
-
-Clone this repository, then copy the versioned module into your project:
+## Copy into an app
 
 ```sh
 node src/demo-walkthrough/sync.mjs /path/to/app/packages/demo-walkthrough
 node src/demo-walkthrough/sync.mjs /path/to/app/packages/demo-walkthrough --check
 ```
 
-Commit the copied files in your app. There is no npm package, symlink or cross-repository runtime import. The host needs React 19, React DOM, TypeScript and a CSS-capable bundler. This repository's development dependencies are only for validating the source.
-
 ```tsx
-import {DemoWalkthroughProvider, DemoWalkthroughStudio} from './packages/demo-walkthrough';
-
-export function Demonstrations() {
-  const controller = useProductDemoController(); // Implement in your app.
-  return <DemoWalkthroughProvider value={controller}>
-    <DemoWalkthroughStudio />
-  </DemoWalkthroughProvider>;
-}
+import {DemoWalkthrough} from './packages/demo-walkthrough';
+import {adapter} from './demo-adapter';
+export function Demonstrations() { return <DemoWalkthrough adapter={adapter}/>; }
 ```
 
-See [integration requirements](src/demo-walkthrough/README.md) and the [controller contract](src/demo-walkthrough/contracts.ts). Mount the player outside your app navigation. Keep adapters outside the copied directory.
+[Adapter and bridge integration](src/demo-walkthrough/README.md). Consumers need React 19, React DOM and a CSS-capable bundler. They commit their own copy, with no npm package, symlink or cross-repository runtime import.
 
-## Source ownership
-
-This repository is the source of truth. ReleaseFast can showcase and distribute its committed copy, and apps consume their own committed copies. Changes originate here, then the sync command updates consumers. Local modifications are rejected rather than silently overwritten. No other repository is needed to build a consuming app.
-
-## Development
+## Develop and try the reference app
 
 ```sh
 npm ci
 npm run check
+npm run build:demo
+npm run demo
 ```
 
-Source lives in `src/demo-walkthrough`. Run `npm run manifest` after reviewed source changes and bump `version.json` when issuing an update. Check and sync each consumer before declaring it up to date.
+The synthetic document demo has four surfaces, three actors, a real in-browser submit interaction, recording/replay and branching review. It stores only its synthetic recordings in browser localStorage. It has no ClubSaaS backend dependency. This is deterministic demonstration tooling, not an autonomous agent evaluation.
 
-## Current scope
+Source lives in src/demo-walkthrough. ReleaseFast distributes a versioned copy; this repository is the source of truth. Run npm run manifest after reviewed source changes, then check/sync consumers. The repository remains private.
 
-This is an experiment, not a finished autonomous recorder SDK. The provider is a low-level controller contract. Apps still implement capture sanitization, actor sessions, storage authorization, permitted actions and outcome checks. Recorded highlights are guidance, not proof that a workflow succeeded. This extraction includes no real-user recordings, credentials or application backend.
-
-[Prior validation and its limits](src/demo-walkthrough/VERIFICATION.md).
+[Verification and limits](src/demo-walkthrough/VERIFICATION.md).
