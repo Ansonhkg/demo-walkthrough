@@ -94,13 +94,12 @@
 }
 .demo-walkthrough-root .wp-frame {
   overflow: hidden;
-  border: 1px solid var(--border);
+  border: none;
   border-radius: 12px;
   background: var(--surface);
 }
 .demo-walkthrough-root .wp-frame-active {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 1px var(--accent);
+  box-shadow: none;
 }
 .demo-walkthrough-root .wp-frame header {
   display: flex;
@@ -569,8 +568,8 @@
   .demo-walkthrough-root .wp-review {
     min-height: 0;
     overflow: auto;
-    border-top: 1px solid var(--border);
-    padding-top: 4px;
+    border-top: none;
+    padding-top: 0;
   }
   .demo-walkthrough-root .wp-review > .wp-capture-markers {
     flex-wrap: nowrap;
@@ -872,8 +871,8 @@
   padding: 8px;
 }
 .demo-walkthrough-root .workflow-player :focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 3px;
+  outline: none;
+  background-color: #34402c;
 }
 .demo-walkthrough-root .workflow-player .dw-slider {
   appearance: auto;
@@ -887,6 +886,10 @@
 }
 
 .demo-walkthrough-root {
+  --dw-background: #10140f;
+  background: var(--dw-background);
+  box-sizing: border-box;
+  padding: 0;
   height: 100dvh;
   min-height: 0;
   display: flex;
@@ -902,3 +905,150 @@
 .demo-walkthrough-root .wp-frame[hidden] {
   display: none !important;
 }
+
+/* Reset browser outlines inside the studio; guided target overlays stay intact. */
+.demo-walkthrough-root,
+.demo-walkthrough-root * { outline: none; }
+.demo-walkthrough-root .wp-view-switch {
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+  padding: 6px 0;
+  flex-shrink: 0;
+}
+
+.demo-walkthrough-root,
+.demo-walkthrough-root * { scrollbar-width: none; }
+.demo-walkthrough-root::-webkit-scrollbar,
+.demo-walkthrough-root *::-webkit-scrollbar { display: none; }
+
+.demo-walkthrough-root .workflow-player .dw-button.wp-record {
+  background: #dc3535;
+  color: #fff;
+}
+.demo-walkthrough-root .workflow-player .dw-button.wp-record:hover,
+.demo-walkthrough-root .workflow-player .dw-button.wp-record:focus-visible {
+  background: #ba2525;
+}
+
+/* Shared spacing rhythm for playback and map tools. */
+.demo-walkthrough-root .workflow-player .wp-controls {
+  gap: 8px;
+  padding: 8px;
+  margin: 0;
+}
+.demo-walkthrough-root .workflow-player .wp-controls .dw-icon {
+  flex: 0 0 36px;
+  width: 36px;
+  height: 36px;
+  min-height: 36px;
+  padding: 8px;
+}
+.demo-walkthrough-root .workflow-player .wp-controls .dw-slider {
+  margin: 0;
+  min-width: 80px;
+}
+.demo-walkthrough-root .workflow-player .wp-controls label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+}
+.demo-walkthrough-root .workflow-player .wp-controls select {
+  height: 36px;
+  padding: 0 8px;
+}
+.demo-walkthrough-root .workflow-player .wp-map header {
+  padding: 12px;
+  gap: 12px;
+}
+.demo-walkthrough-root .workflow-player .wp-map header > div:last-child {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.demo-walkthrough-root .workflow-player .wp-map header small {
+  display: block;
+  margin-top: 4px;
+}
+.demo-walkthrough-root .workflow-player .wp-map header button {
+  height: 36px;
+  padding: 8px;
+}
+.demo-walkthrough-root .workflow-player .wp-map header button[aria-label] {
+  width: 36px;
+}
+
+/* Studio-wide rhythm: 8px within controls, 12px between sections, 16px outer inset. */
+.demo-walkthrough-root .workflow-player {
+  --dw-space-control: 8px;
+  --dw-space-section: 12px;
+  --dw-space-page: 16px;
+  padding: var(--dw-space-page);
+  gap: var(--dw-space-section);
+}
+.demo-walkthrough-root .workflow-player .wp-heading {
+  height: auto;
+  min-height: 36px;
+  margin: 0;
+  padding: 0;
+}
+.demo-walkthrough-root .workflow-player .wp-heading > div:first-child {
+  gap: var(--dw-space-page);
+  flex-wrap: wrap;
+}
+.demo-walkthrough-root .workflow-player .wp-heading h1 {
+  margin: 0;
+  font-size: 18px;
+  line-height: 24px;
+}
+.demo-walkthrough-root .workflow-player .wp-workflow-picker {
+  gap: var(--dw-space-control);
+  margin: 0;
+  line-height: 20px;
+}
+.demo-walkthrough-root .workflow-player .wp-workflow-picker select {
+  height: 36px;
+  padding: 0 12px;
+  border-radius: 8px;
+}
+.demo-walkthrough-root .workflow-player .wp-workspace {
+  gap: var(--dw-space-control);
+}
+.demo-walkthrough-root .workflow-player .wp-workspace > .wp-row {
+  padding: 0;
+  min-height: 24px;
+}
+.demo-walkthrough-root .workflow-player .wp-workspace h2 {
+  margin: 0;
+  font-size: 16px;
+  line-height: 24px;
+}
+.demo-walkthrough-root .workflow-player .wp-frame header {
+  padding: 8px 12px;
+  min-height: 32px;
+  line-height: 16px;
+}
+.demo-walkthrough-root .workflow-player .wp-map h3 {
+  margin: 0;
+  font-size: 14px;
+  line-height: 20px;
+}
+.demo-walkthrough-root .workflow-player .wp-map header small {
+  line-height: 16px;
+}
+.demo-walkthrough-root .workflow-player .wp-frame > .wp-subtitles {
+  padding: 12px;
+}
+.demo-walkthrough-root .workflow-player .wp-subtitles > p {
+  margin: 0;
+  line-height: 20px;
+}
+@media (min-width: 801px) {
+  .demo-walkthrough-root .workflow-player[data-review="map"] .wp-workspace {
+    grid-template-rows: 24px minmax(0, 1fr) auto minmax(220px, 30dvh);
+  }
+}
+
+.demo-walkthrough-root .workflow-player .wp-brand { display: flex; align-items: center; }
+.demo-walkthrough-root .wp-brand img { display: block; width: 36px; height: 36px; object-fit: contain; }

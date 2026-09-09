@@ -15,11 +15,9 @@ export * from "./provider";
 export type * from "./contracts";
 export function DemoWalkthroughStudio() {
   const {
-    cancelRun,
-    libraryOpen,
-    reviewView,
-    actor,
+        actor,
     busy,
+    enabled,
     running,
     chooseActor,
     actors,
@@ -27,21 +25,12 @@ export function DemoWalkthroughStudio() {
     workflow,
     chooseWorkflow,
     journeyTitle,
-    setLibraryOpen,
-    setReviewView,
-    recordings,
-    setRecording,
-    setMode,
+          setMode,
     setPlaying,
     setTime,
     recordingProgress,
     clock,
-    enabled,
-    setActor,
-    stopRun,
-    defaultActor,
-    fresh,
-    names,
+              names,
     node,
     stage,
     surfaces,
@@ -70,12 +59,8 @@ export function DemoWalkthroughStudio() {
     setSpeed,
     captures,
     reviewPane,
-    activeChapter,
-    branch,
-    setBranch,
-    guideState,
-    fixture,
-    details,
+          guideState,
+      details,
     error,
     setZoom,
     width,
@@ -83,10 +68,7 @@ export function DemoWalkthroughStudio() {
     height,
     graph,
     select,
-    chapters,
-    branches,
-    record,
-    frameName,
+          frameName,
     prepareSnapshot,
     saveSubtitles,
   } = useDemoWalkthrough();
@@ -94,12 +76,12 @@ export function DemoWalkthroughStudio() {
     <div className="demo-walkthrough-root">
       <div
         className="workflow-player"
-        data-library={libraryOpen}
-        data-review={reviewView}
+        data-library="false"
+        data-review="map"
       >
         <header className="wp-heading">
           <div>
-            <h1>Workflow studio</h1>
+            <h1 className="wp-brand"><img src={new URL("./logo.png", import.meta.url).href} alt="Demo Walkthrough" width="36" height="36" /></h1>
             <label className="wp-workflow-picker">
               Perspective
               <select
@@ -113,9 +95,7 @@ export function DemoWalkthroughStudio() {
                     {a.label}
                   </option>
                 ))}
-                {actor === "all" && (
-                  <option value="all">Complete process</option>
-                )}
+                <option value="all">Complete process</option>
               </select>
             </label>
             <label className="wp-workflow-picker">
@@ -127,7 +107,7 @@ export function DemoWalkthroughStudio() {
                 onChange={(e) => chooseWorkflow(e.target.value)}
               >
                 {!journeys.length && (
-                  <option value="">No recorded journeys yet</option>
+                  <option value="">No journeys mapped yet</option>
                 )}
                 {journeys.map((w) => (
                   <option key={w.id} value={w.id}>
@@ -137,79 +117,13 @@ export function DemoWalkthroughStudio() {
               </select>
             </label>
           </div>
-          <div className="wp-row">
-            <Button
-              size="sm"
-              variant="ghost"
-              aria-expanded={libraryOpen}
-              onPress={() => setLibraryOpen((v) => !v)}
-            >
-              Library & recordings
-            </Button>
-            <Button
-              size="sm"
-              variant={reviewView === "timeline" ? "secondary" : "ghost"}
-              aria-pressed={reviewView === "timeline"}
-              onPress={() => setReviewView("timeline")}
-            >
-              Timeline
-            </Button>
-            <Button
-              size="sm"
-              variant={reviewView === "map" ? "secondary" : "ghost"}
-              aria-pressed={reviewView === "map"}
-              onPress={() => setReviewView("map")}
-            >
-              Workflow map
-            </Button>
-          </div>
         </header>
         <div className="wp-layout">
-          <aside className="wp-library">
-            <h2>Journeys for this person</h2>
-            {journeys.map((w) => (
-              <Button
-                key={w.id}
-                variant={w.id === workflow.id ? "secondary" : "ghost"}
-                isDisabled={busy || running}
-                aria-label={w.title}
-                onPress={() => chooseWorkflow(w.id)}
-              >
-                {journeyTitle(w.id, actor, w.title)}
-              </Button>
-            ))}
-            <hr />
-            <h3>Saved recordings</h3>
-            {recordings
-              .filter((r) => r.workflow === workflow.id && journeys.length > 0)
-              .map((r) => (
-                <button
-                  className="wp-run"
-                  key={r.id}
-                  disabled={running}
-                  onClick={() => {
-                    setRecording(r);
-                    setMode("replay");
-                    setPlaying(false);
-                    setTime(0);
-                  }}
-                >
-                  {new Date(r.createdAt).toLocaleString()}
-                  <small>
-                    {recordingProgress(r, workflow).label} ·{r.captures.length}{" "}
-                    captures · {clock(r.captures.at(-1)?.at || 0)}
-                  </small>
-                </button>
-              ))}
-            {!recordings.some((r) => r.workflow === workflow.id) && (
-              <p>No recording yet. Record the complete process to create one.</p>
-            )}
-          </aside>
           {!journeys.length ? (
             <section className="wp-actor-empty">
               <h2>{actorName(actor)} journeys</h2>
               <p>
-                No recorded journeys are available for this perspective yet.
+                No journeys have been mapped for this perspective yet.
               </p>
             </section>
           ) : (
@@ -219,46 +133,6 @@ export function DemoWalkthroughStudio() {
                   <h2>{journeyTitle(workflow.id, actor, workflow.title)}</h2>
                   <p>{workflow.description}</p>
                 </div>
-                <Button
-                  isDisabled={!enabled || busy || running}
-                  onPress={() => {
-                    setActor("all");
-                    record();
-                  }}
-                >
-                  Record complete process
-                </Button>
-                {running && (
-                  <Button
-                    variant="secondary"
-                    onPress={() => {
-                      cancelRun();
-                    }}
-                  >
-                    Stop run
-                  </Button>
-                )}
-                <Button
-                  size="sm"
-                  variant="ghost"
-                  isDisabled={running}
-                  onPress={() =>
-                    chooseActor(
-                      actor === "all" ? defaultActor(workflow.id) : "all",
-                    )
-                  }
-                >
-                  {actor === "all"
-                    ? "View personal journey"
-                    : "View complete process"}
-                </Button>
-                <Button
-                  variant="secondary"
-                  onPress={fresh}
-                  isDisabled={busy || running}
-                >
-                  New recording
-                </Button>
               </div>
               <p className="wp-note" aria-live="polite">
                 Now showing {names[node.surface]} · {node.label}
@@ -484,94 +358,6 @@ export function DemoWalkthroughStudio() {
                 className="wp-review"
                 aria-label="Workflow review"
               >
-                {mode === "replay" && chapters.length > 0 && (
-                  <div aria-label="Parent steps" className="wp-capture-markers">
-                    {chapters.map((chapter, i) => {
-                      const first = playback.find((c) =>
-                        chapter.steps.includes(c.stepId),
-                      );
-                      return (
-                        <Button
-                          key={chapter.label}
-                          size="sm"
-                          variant="ghost"
-                          isDisabled={!first}
-                          aria-pressed={activeChapter === chapter}
-                          onPress={() => {
-                            setPlaying(false);
-                            setTime(first!.playAt);
-                          }}
-                        >
-                          {i + 1}. {chapter.label}
-                        </Button>
-                      );
-                    })}
-                  </div>
-                )}
-                {mode === "replay" && chapters.length > 0 && activeChapter && (
-                  <p role="status">
-                    {activeChapter.label} · action{" "}
-                    {Math.max(1, activeChapter.steps.indexOf(selected) + 1)} of{" "}
-                    {activeChapter.steps.length}
-                    {" · "}
-                    {workflow.nodes.find((n) => n.id === selected)?.label}
-                  </p>
-                )}
-                {mode === "replay" && (
-                  <div
-                    className="wp-capture-markers"
-                    aria-label="Captured frames"
-                  >
-                    {playback
-                      .filter(
-                        (c) =>
-                          chapters.length === 0 ||
-                          activeChapter?.steps.includes(c.stepId),
-                      )
-                      .map((c, i) => (
-                        <Button
-                          key={i}
-                          variant="ghost"
-                          size="sm"
-                          onPress={() => {
-                            setPlaying(false);
-                            setTime(c.playAt);
-                          }}
-                          aria-pressed={
-                            playback.filter((f) => f.playAt <= time).at(-1) ===
-                            c
-                          }
-                        >
-                          {i + 1}.{" "}
-                          {workflow.nodes.find((n) => n.id === c.stepId)?.label}
-                          {c.check === "input" ? " · Entered" : ""} ·{" "}
-                          {clock(c.at)}
-                        </Button>
-                      ))}
-                  </div>
-                )}
-                {chapters.length > 0 && recording && (
-                  <label>
-                    Playback branch{" "}
-                    <select
-                      aria-label="Playback branch"
-                      value={branch}
-                      disabled={running}
-                      onChange={(e) => {
-                        setBranch(e.target.value);
-                        setTime(0);
-                        setPlaying(false);
-                        setMode("replay");
-                      }}
-                    >
-                      {branches.map((b) => (
-                        <option key={b.id} value={b.id}>
-                          {b.label}
-                        </option>
-                      ))}
-                    </select>
-                  </label>
-                )}
                 {recording &&
                   (() => {
                     const progress = recordingProgress(recording, workflow);
@@ -589,7 +375,7 @@ export function DemoWalkthroughStudio() {
                   })()}
                 <p className="wp-note">
                   {mode === "live"
-                    ? "Live preview. Record the complete process to capture actions and their observed results. Captures alone do not assert a test passed."
+                    ? "Live preview. An agent can prepare a walkthrough for this journey. The workflow map is available to review now."
                     : `${captures.length} captured frames · Each capture held for review · Original recording ${clock(captures.at(-1)?.at || 0)}. Only captured states are available, not continuous video.`}
                 </p>
                 {guideState && mode === "live" && (

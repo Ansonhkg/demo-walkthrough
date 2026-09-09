@@ -36,7 +36,7 @@ export function prepareReplaySnapshot(
   doc.head.prepend(meta);
   const style = doc.createElement("style");
   style.textContent =
-    '*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}[style*="--visual-viewport"]{--visual-viewport-height:100dvh!important;--visual-viewport-width:100vw!important}body{top:0!important}';
+    '*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}[style*="--visual-viewport"]{--visual-viewport-height:100dvh!important;--visual-viewport-width:100vw!important}body{top:0!important}*{scrollbar-width:none!important}*::-webkit-scrollbar{display:none!important}';
   doc.head.append(style);
   return doc.documentElement.outerHTML;
 }

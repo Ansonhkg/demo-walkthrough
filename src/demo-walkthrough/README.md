@@ -13,7 +13,7 @@ import {adapter} from './my-product/demo-adapter';
 export function Demonstrations() { return <DemoWalkthrough adapter={adapter}/>; }
 ```
 
-Keep the adapter object stable. The framework owns the controller, UI, playback, chapter/branch selection, cursor geometry, click pulses, transport correlation/cancellation, recording lifecycle, target resolution, capture mechanics and sanitized replay. `StudioController` is the internal presentation port; hosts do not implement its state/setters.
+Keep the adapter object stable. The framework owns the controller, UI, playback, journey selection and DAG navigation, cursor geometry, click pulses, transport correlation/cancellation, recording lifecycle, target resolution, capture mechanics and sanitized replay. `StudioController` is the internal presentation port; hosts do not implement its state/setters.
 
 ## Adapter contract
 
@@ -51,3 +51,7 @@ A DAG defines dependencies/choices; `route` defines the selected traversal. Chap
 ## Updating
 
 Change canonical source, bump version.json, regenerate the manifest, run checks, then sync consumers. Sync rejects local edits, symlinks, unmanaged files, stale files during check, and mismatched manifests. Removed managed files are deleted only when unchanged from the previous manifest. No cross-repository dependency is introduced.
+
+## Agent preparation
+
+Read [AGENT-BRIEF.md](AGENT-BRIEF.md) to inventory actors and journeys and prepare reviewed replay evidence. The viewer has no recording controls or saved-recordings library. Recording and storage APIs remain available to authoring tools.

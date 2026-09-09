@@ -8,3 +8,7 @@
 - Update version.json hashes after source changes. Verify consumers before syncing; never overwrite local edits.
 - Keep this repository private. Use gh for GitHub operations.
 - Run npm run check before shipping changes.
+
+## Product journey review
+
+Read `src/demo-walkthrough/AGENT-BRIEF.md` when mapping an app or preparing a demonstration. The owner reviews actors, journeys and the DAG; agents prepare the walkthroughs. Keep recording controls and saved-recording management out of the viewer.

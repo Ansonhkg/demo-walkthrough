@@ -166,7 +166,7 @@ export function useDemoStudio(adapter: StudioAdapter): StudioController {
         setEnabled(true);
         setRecordings(runs);
         const r =
-          initial.recording === "latest"
+          (!initial.recording || initial.recording === "latest")
             ? latestRecording(runs, initial.workflow)
             : runs.find(
                 (r) =>
