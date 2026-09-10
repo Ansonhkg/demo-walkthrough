@@ -469,6 +469,7 @@ export function useDemoStudio(adapter: StudioAdapter): StudioController {
     branches,
     record,
     frameName: (n) => framePrefix + n,
+    displayAddress: adapter.displayAddress,
     prepareSnapshot: adapter.prepareSnapshot,
     saveSubtitles: (e) => adapter.preferences?.write(e),
   };

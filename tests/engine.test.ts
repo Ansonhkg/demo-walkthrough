@@ -126,7 +126,7 @@ test("recorder freezes definitions, captions and actual click cues across four s
   ];
   assert.deepEqual(
     workflowPlayback(unordered, workflow).map((c) => c.stepId),
-    ["start", "write", "write", "review"],
+    ["start", "write", "write", "review", "review"],
   );
 });
 test("abort and action failure save failed evidence and never claim completion", async () => {
