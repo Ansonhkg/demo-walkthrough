@@ -7,14 +7,17 @@ export function ReplayFrame({
   title,
   active,
   onFocus,
+  onTakeover,
   prepareSnapshot,
 }: {
+  onTakeover?: () => void;
   prepareSnapshot: (capture: Capture) => string;
   capture: Capture;
   title: string;
   active: boolean;
   onFocus: (x: number, y: number) => void;
 }) {
+  const [takeover, setTakeover] = useState(false);
   const maskId = useId().replace(/:/g, "");
   const html = useMemo(
     () => prepareSnapshot(capture),
@@ -72,9 +75,19 @@ export function ReplayFrame({
     () => () => pendingFrames.current.forEach(cancelAnimationFrame),
     [],
   );
+  useEffect(() => { setTakeover(false); }, [html]);
+  const returnToFrame = () => {
+    setTakeover(false);
+    const frame = buffer.current?.querySelector<HTMLIFrameElement>('iframe[aria-hidden="false"]');
+    if (frame) setRect(measure(frame, true));
+  };
   const documents = painted && painted !== html ? [painted, html] : [html];
   return (
-    <div ref={buffer} className="wp-replay-buffer" aria-busy={painted !== html}>
+    <div ref={buffer} className="wp-replay-buffer" aria-busy={painted !== html} onWheelCapture={event => {
+      if (!takeover) return;
+      event.stopPropagation();
+      buffer.current?.querySelector<HTMLIFrameElement>('iframe[aria-hidden="false"]')?.contentWindow?.scrollBy(event.deltaX, event.deltaY);
+    }}>
       {documents.map((document) => (
         <iframe
           key={document}
@@ -82,8 +95,10 @@ export function ReplayFrame({
           sandbox="allow-same-origin"
           srcDoc={document}
           aria-hidden={document !== painted}
-          tabIndex={document === painted ? 0 : -1}
-          style={{ visibility: document === painted ? "visible" : "hidden" }}
+          tabIndex={takeover && document === painted ? 0 : -1}
+          // Replay is a fixed slide. Wheel/touch input belongs to the outer viewer,
+          // otherwise the captured document scrolls independently of its spotlight.
+          style={{ visibility: document === painted ? "visible" : "hidden", pointerEvents: "none" }}
           onLoad={(event) => {
             const frame = event.currentTarget;
             measure(frame, true);
@@ -102,7 +117,10 @@ export function ReplayFrame({
           }}
         />
       ))}
-      {rect && (
+      <button type="button" className="wp-takeover" aria-pressed={takeover} onClick={() => takeover ? returnToFrame() : (onTakeover?.(), setTakeover(true))}>
+        {takeover ? "Return to frame" : "Take over"}
+      </button>
+      {!takeover && rect && (
         <svg
           className="wp-spotlight"
           width="100%"
